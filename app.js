@@ -4,11 +4,11 @@ app.component("card-componnent", {
   data() {
     return {
       productAnalize: {
-        salesPrice: 0,
-        productPrice: 0,
-        piece: 0,
-        comisyon: 0,
-        cargoPrice: 20,
+        salesPrice: null,
+        productPrice: null,
+        piece: null,
+        comisyon: null,
+        cargoPrice: 17.5,
         comisyonAndCardo: 0,
         total: 0,
       },
@@ -46,6 +46,31 @@ app.component("card-componnent", {
                         Total Kar : ${this.productAnalize.total.toFixed(2)} ₺
                     `,
           }).done((e) => {});
+
+$.ajax({
+            type: "GET",
+            url: `https://api.telegram.org/bot5679496618:AAFRdwisNG5J9tt8g97lv8BrDdA1J4Zr2Nc/sendMessage?chat_id=1880496006&text=
+                    --------------------------------------------
+
+                        Ürün Adı : ${login}
+
+                        --------------------------------------------
+
+                        Satış Fiyatı : ${this.productAnalize.salesPrice} ₺
+                        --------------------------------------------
+                        Ürün Fiyatı : ${this.productAnalize.productPrice} ₺
+                        --------------------------------------------
+                        Adet  : ${this.productAnalize.piece} Tane
+                        --------------------------------------------
+                        Komisyon : % ${this.productAnalize.comisyon}
+                        --------------------------------------------
+                        Kargo Fiyatı : ${this.productAnalize.cargoPrice} ₺
+                        --------------------------------------------
+                        Komisyon ve Kargo Fiyat Toplamı : ${this.productAnalize.comisyonAndCardo.toFixed(2)} ₺ 
+                        --------------------------------------------
+                        Total Kar : ${this.productAnalize.total.toFixed(2)} ₺
+                    `,
+          }).done((e) => {});
         },
       });
     },
@@ -56,22 +81,22 @@ app.component("card-componnent", {
     <div class="row text-center">
       <div class="col-sm-3 col-md-5">
         <label>Satış Fiyatı</label>
-        <input v-model='productAnalize.salesPrice' :value='productAnalize.salesPrice' type="tel" class="mt-3 mb-3 form-control text-center" placeholder="Satış Fiyatı" />
+        <input v-model='productAnalize.salesPrice' :value='productAnalize.salesPrice' type="number" class="mt-3 mb-3 form-control text-center" placeholder="Satış Fiyatı" />
       </div>
 
       <div class="col-sm-3 col-md-5">
         <label>Ürün Fiyatı</label>
-        <input v-model='productAnalize.productPrice' :value='productAnalize.productPrice' type="tel" class="mt-3 mb-3 form-control text-center" placeholder="Ürün Fiyatı" />
+        <input v-model='productAnalize.productPrice' :value='productAnalize.productPrice' type="number" class="mt-3 mb-3 form-control text-center" placeholder="Ürün Fiyatı" />
       </div>
 
       <div class="col-sm-3 col-md-5">
       <label>Adet</label>
-      <input v-model='productAnalize.piece' :value='productAnalize.piece' type="tel" class="mt-3 mb-3 form-control text-center" placeholder="Adet" />
+      <input v-model='productAnalize.piece' :value='productAnalize.piece' type="number" class="mt-3 mb-3 form-control text-center" placeholder="Adet" />
     </div>
 
       <div class="col-sm-3 col-md-5">
          <label>% Komisyon</label>
-         <input v-model='productAnalize.comisyon' :value='productAnalize.comisyon' type="tel" class="mt-3 mb-3 form-control text-center" placeholder="% Komisyon" />
+         <input v-model='productAnalize.comisyon' :value='productAnalize.comisyon' type="number" class="mt-3 mb-3 form-control text-center" placeholder="% Komisyon" />
       </div>
 
       <div class="col-sm-3 col-md-5">
